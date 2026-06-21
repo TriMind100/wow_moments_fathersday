@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Baba — A Father's Day Page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #ECE1C4;
+    --paper-deep: #E1D2A8;
+    --ink: #33261B;
+    --ink-soft: #5A4836;
+    --rust: #C75D32;
+    --pine: #33503F;
+    --gold: #DDAA3C;
+    --line: rgba(51,38,27,0.14);
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* paper grain */
+  .grain{
+    position:fixed; inset:0; z-index:2; pointer-events:none;
+    mix-blend-mode:multiply; opacity:0.5;
+  }
+
+  section, header.eyebrow{ position:relative; z-index:3; }
+
+  .eyebrow{
+    text-align:center;
+    padding:28px 0 6px;
+    font-family:'Work Sans', sans-serif;
+    font-size:12px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    opacity:0.7;
+  }
+
+  h1, h2, .handwritten{
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    color:var(--ink);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:88vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px 24px 60px;
+    position:relative;
+  }
+
+  .kicker{
+    font-family:'Caveat', cursive;
+    font-size:28px;
+    color:var(--rust);
+    margin-bottom:4px;
+  }
+
+  .hero h1{
+    font-size:64px;
+    line-height:1.05;
+    max-width:680px;
+  }
+
+  .hero .sub{
+    margin-top:18px;
+    font-size:17px;
+    color:var(--ink-soft);
+    max-width:420px;
+  }
+
+  .hero-sketch{
+    width:min(520px, 90vw);
+    margin-top:28px;
+    mix-blend-mode: multiply;
+    border-radius: 6px;
+  }
+
+  .scroll-cue{
+    margin-top:30px;
+    font-size:13px;
+    color:var(--ink-soft);
+    opacity:0.6;
+    animation:bob 2.4s ease-in-out infinite;
+  }
+
+  @keyframes bob{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(6px); }
+  }
+
+  .hero-video-container {
+    width: min(800px, 90vw);
+    margin: 40px auto 30px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(51,38,27,0.15);
+    background: #e3d5b8;
+    aspect-ratio: 16 / 9;
+    position: relative;
+  }
+  .hero-video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .watermark-cover {
+    position: absolute;
+    bottom: 12.2%;
+    right: 7.5%;
+    width: 6%;
+    aspect-ratio: 1 / 1;
+    z-index: 20;
+    opacity: 0.95;
+    pointer-events: none;
+    transform: rotate(15deg) scale(1.4);
+    filter: drop-shadow(0 2px 4px rgba(51,38,27,0.3));
+  }
+  .watermark-cover svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* ---------- DIVIDER ---------- */
+  .divider{
+    display:flex; justify-content:center;
+    padding:10px 0 30px;
+  }
+  .divider svg{ width:160px; opacity:0.5; }
+
+  /* ---------- MEMORIES ---------- */
+  .memories{
+    padding:20px 24px 70px;
+    text-align:center;
+  }
+
+  .memories h2{
+    font-size:46px;
+    margin-bottom:8px;
+  }
+
+  .memories .lede{
+    color:var(--ink-soft);
+    font-size:15px;
+    margin-bottom:40px;
+  }
+
+  .memory-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:28px;
+    max-width:1040px;
+    margin:0 auto;
+  }
+
+  .memory-card{
+    background:var(--paper-deep);
+    border-radius:4px;
+    padding:22px 18px 24px;
+    box-shadow:0 6px 14px rgba(51,38,27,0.12);
+    transform:rotate(var(--tilt, 0deg));
+    transition:transform .3s ease;
+  }
+  .memory-card:nth-child(1){ --tilt:-2deg; }
+  .memory-card:nth-child(2){ --tilt:1.5deg; }
+  .memory-card:nth-child(3){ --tilt:-1deg; }
+  .memory-card:nth-child(4){ --tilt:2deg; }
+  .memory-card:hover{ transform:rotate(0deg) translateY(-4px); }
+
+  .memory-card .tape{
+    width:54px; height:18px;
+    background:var(--pine);
+    opacity:0.55;
+    margin:-34px auto 14px;
+    border-radius:1px;
+  }
+
+  .memory-card img{ width:120px; height:120px; margin-bottom:10px; mix-blend-mode: multiply; object-fit: contain; }
+
+  .memory-caption{
+    font-size:14.5px;
+    color:var(--ink-soft);
+    line-height:1.5;
+  }
+
+  /* ---------- LETTER ---------- */
+  .letter{
+    padding:40px 24px 80px;
+    display:flex;
+    justify-content:center;
+  }
+
+  .notebook-page{
+    max-width:560px;
+    background-color: #F7F4EA;
+    background-image:repeating-linear-gradient(
+      to bottom,
+      transparent 0px, transparent 33px,
+      var(--line) 34px
+    );
+    padding:50px 44px;
+    border-left:3px solid var(--rust);
+    box-shadow:0 8px 24px rgba(51,38,27,0.10);
+  }
+
+  .letter-greeting{
+    font-family:'Caveat', cursive;
+    font-size:34px;
+    margin-bottom:18px;
+  }
+
+  .letter-body{
+    font-family:'Caveat', cursive;
+    font-size:24px;
+    line-height:1.7;
+    color:var(--ink);
+  }
+
+  .letter-sign{
+    font-family:'Caveat', cursive;
+    font-size:26px;
+    margin-top:26px;
+    text-align:right;
+    color:var(--rust);
+  }
+
+  /* ---------- CLOSING ---------- */
+  .closing{
+    text-align:center;
+    padding:30px 24px 100px;
+  }
+
+  .closing-sketch{ width:160px; margin-bottom:10px; }
+
+  .closing h2{
+    font-size:50px;
+  }
+
+  .footer-credit{
+    margin-top:14px;
+    font-size:13px;
+    color:var(--ink-soft);
+    opacity:0.7;
+    letter-spacing:0.04em;
+  }
+
+  /* ---------- sketch drawing animation ---------- */
+  .draw-path{
+    fill:none;
+    stroke:var(--ink);
+    stroke-width:3;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    transition:stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1);
+  }
+  .accent-path{ stroke:var(--rust); }
+  .pine-path{ stroke:var(--pine); }
+
+  /* floating doodles */
+  .floaty{
+    position:absolute;
+    opacity:0.35;
+    animation:rise 9s linear infinite;
+  }
+  @keyframes rise{
+    0%{ transform:translateY(0) rotate(0deg); opacity:0; }
+    10%{ opacity:0.35; }
+    90%{ opacity:0.25; }
+    100%{ transform:translateY(-140px) rotate(12deg); opacity:0; }
+  }
+
+  .magic-particle {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 10;
+  }
+  @keyframes floatMagic {
+    0% { transform: translateY(30px) translateX(0) scale(0.5) rotate(0deg); opacity: 0; }
+    25% { opacity: 0.8; }
+    50% { transform: translateY(-80px) translateX(var(--sway)) scale(1) rotate(var(--rot)); opacity: 0.8; }
+    100% { transform: translateY(-200px) translateX(calc(var(--sway) * -1)) scale(1.2) rotate(calc(var(--rot) * -1)); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .draw-path{ transition:none !important; }
+    .scroll-cue, .floaty{ animation:none !important; }
+  }
+
+  @media (max-width:780px){
+    .hero h1{ font-size:42px; }
+    .memory-grid{ grid-template-columns:1fr 1fr; gap:20px; }
+    .notebook-page{ padding:36px 26px; }
+    .letter-body{ font-size:21px; }
+  }
+  @media (max-width:460px){
+    .hero h1{ font-size:32px; }
+    .hero .sub{ font-size:15px; }
+    .memory-grid{ grid-template-columns:1fr; max-width:300px; }
+    .letter-body{ font-size:18px; line-height:1.6; }
+    .letter-greeting{ font-size:26px; }
+    .letter-sign{ font-size:22px; margin-top:20px; }
+    .closing h2{ font-size:36px; }
+    .env-front-text { font-size: 28px; }
+    .env-front-text .sub { font-size: 16px; }
+    .letter-section.open { height: 930px; }
+    .letter-section.open .env-letter-container { top: -630px; bottom: 80px; }
+  }
+
+  /* ---------- INLINE ENVELOPE ---------- */
+  .letter-section {
+    position: relative;
+    width: 90vw;
+    max-width: 600px;
+    height: 400px;
+    margin: 100px auto;
+    transition: height 1.5s 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  @media (max-width: 460px) {
+    .letter-section { height: 280px; }
+  }
+
+  .letter-section.open {
+    height: 900px; /* Expands to fit the letter and envelope */
+  }
+
+  .env-wrapper {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 400px;
+    background: #C4A471;
+    border-radius: 6px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: transform 0.4s;
+    perspective: 1500px;
+  }
+  @media (max-width: 460px) {
+    .env-wrapper { height: 280px; }
+  }
+  .letter-section.open .env-wrapper {
+    cursor: default;
+  }
+
+  .env-back-inside {
+    position: absolute; inset: 0;
+    background: #A58B60;
+    border-radius: 6px;
+  }
+
+  .env-front-text {
+    position: absolute;
+    top: 68%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: 38px;
+    color: #5A4836;
+    pointer-events: none;
+    line-height: 1.1;
+    opacity: 0.85;
+  }
+  .env-front-text p { margin: 0; }
+  .env-front-text .sub {
+    font-size: 20px;
+    font-family: 'Work Sans', sans-serif;
+    letter-spacing: 2px;
+    margin-top: 5px;
+    color: #4a3928;
+  }
+  @media (max-width: 460px) {
+    .env-front-text { font-size: 28px; }
+    .env-front-text .sub { font-size: 14px; }
+  }
+
+  .env-flaps {
+    position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  }
+  .env-flaps svg { width: 100%; height: 100%; display: block; }
+
+  .env-top-flap {
+    position: absolute; top: 0; left: 0; right: 0; height: 55%;
+    z-index: 4; transform-origin: top;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), z-index 0s 0.4s;
+    transform-style: preserve-3d;
+  }
+  .env-top-flap svg { width: 100%; height: 100%; display: block; }
+
+  .letter-section.open .env-top-flap {
+    transform: rotateX(180deg);
+    z-index: 1; /* Goes behind the letter */
+  }
+
+  .env-seal {
+    position: absolute;
+    top: 55%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px; height: 60px;
+    background: #A03A26;
+    border-radius: 50%;
+    z-index: 5;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3), 0 4px 6px rgba(0,0,0,0.3);
+    transition: opacity 0.4s;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .env-seal::after {
+    content: 'Open';
+    white-space: pre-wrap;
+    color: #EAD3A6;
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    text-align: center;
+    line-height: 1.1;
+  }
+  .letter-section.open .env-seal { opacity: 0; }
+
+  .env-letter-container {
+    position: absolute;
+    bottom: 20px; left: 20px; right: 20px;
+    top: 20px;
+    z-index: 2;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.15);
+    transition: top 1.5s 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), 
+                bottom 1.5s 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .letter-section.open .env-letter-container {
+    top: -480px;
+    bottom: 120px;
+  }
+
+  .env-letter-container .notebook-page {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <filter id="paperNoise">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="noise"/>
+    <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0"/>
+  </filter>
+</svg>
+<div class="grain" style="filter:url(#paperNoise); background:#000;"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="kicker">Happy Father's Day</p>
+  <h1>For the man who<br>walked every road first.</h1>
+  <p class="sub">A small page for someone who's given me everything — made with love, just for you.</p>
+
+  <div class="hero-video-container">
+    <video src="baba_video.mp4" autoplay loop muted playsinline poster="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450'><rect width='100%25' height='100%25' fill='%23D8BC8C'/><text x='50%25' y='50%25' fill='%235A4836' font-family='sans-serif' font-size='24' text-anchor='middle'>Please save your video as baba_video.mp4 in the folder</text></svg>"></video>
+    <div class="watermark-cover">
+      <svg viewBox="0 0 10 11">
+        <path d="M10,4 C10,1 5,1 5,5 C5,1 0,1 0,4 C0,7 5,11 5,11 C5,11 10,7 10,4 Z" fill="#FFF3E0"></path>
+      </svg>
+    </div>
+  </div>
+
+  <div class="scroll-cue">↓ scroll down</div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 160 16"><path class="draw-path" d="M2,8 Q20,2 38,8 T76,8 T114,8 T158,8" stroke-width="2"/></svg>
+</div>
+
+<!-- MEMORIES -->
+<section class="memories">
+  <h2>Moments We Made</h2>
+  <p class="lede">A few of the thousand little things I still carry with me.</p>
+
+  <div class="memory-grid">
+
+    <div class="memory-card">
+      <div class="tape"></div>
+      <img src="bicycle_memory.png" alt="Bicycle memory">
+      <p class="memory-caption">The summer you ran behind my bicycle, still holding the seat long after you'd already let go.</p>
+    </div>
+
+    <div class="memory-card">
+      <div class="tape"></div>
+      <img src="piggyback_memory.png" alt="Piggyback ride memory">
+      <p class="memory-caption">Piggyback rides home when my legs gave up halfway, and you never once complained about the extra weight.</p>
+    </div>
+
+    <div class="memory-card">
+      <div class="tape"></div>
+      <img src="fishing_memory.png" alt="Riverbank memory">
+      <p class="memory-caption">Sitting quietly on the riverbank, two lines in the water, saying nothing and meaning everything.</p>
+    </div>
+
+    <div class="memory-card">
+      <div class="tape"></div>
+      <img src="bedtime_memory.png" alt="Bedtime story memory">
+      <p class="memory-caption">Bedtime stories you read twice because I always asked for "one more page," and you always gave it.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider">
+  <svg viewBox="0 0 160 16"><path class="draw-path" d="M2,8 Q20,2 38,8 T76,8 T114,8 T158,8" stroke-width="2"/></svg>
+</div>
+
+<!-- LETTER -->
+<section class="letter-section" id="letter-section">
+  <div class="env-wrapper" onclick="openInlineEnvelope(this)">
+    <div class="env-back-inside"></div>
+    
+    <div class="env-letter-container">
+      <div class="notebook-page">
+        <p class="letter-greeting">Dear Baba,</p>
+        <p class="letter-body">
+          I don't think I've ever really told you this properly — so I'm writing it down instead.
+          Every road you walked, every early morning you woke up for us, every quiet sacrifice you never made a big deal of —
+          I noticed. I'm who I am today because you showed up, again and again, without ever asking for thanks.
+          So today, just for once, let me be the one delivering something to you.
+        </p>
+        <p class="letter-sign">— Your son</p>
+      </div>
+    </div>
+
+    <div class="env-flaps">
+      <svg viewBox="0 0 600 400" preserveAspectRatio="none">
+        <!-- Left Flap -->
+        <path d="M 0,0 L 250,220 L 0,400 Z" fill="#C4A471" stroke="#b59461" stroke-width="2" stroke-linejoin="round"/>
+        <!-- Right Flap -->
+        <path d="M 600,0 L 350,220 L 600,400 Z" fill="#C4A471" stroke="#b59461" stroke-width="2" stroke-linejoin="round"/>
+        <!-- Bottom Flap -->
+        <path d="M 0,400 L 300,180 L 600,400 Z" fill="#D8BC8C" stroke="#cfae79" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    
+    <div class="env-front-text">
+      <p>To Baba</p>
+      <p class="sub">My first hero</p>
+    </div>
+
+    <div class="env-top-flap">
+      <svg viewBox="0 0 600 220" preserveAspectRatio="none">
+        <path d="M 0,0 L 300,220 L 600,0 Z" fill="#EAD3A6" stroke="#d5b986" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <div class="env-seal"></div>
+  </div>
+</section>
+
+<script>
+function openInlineEnvelope(el) {
+  const section = document.getElementById('letter-section');
+  if (!section.classList.contains('open')) {
+    section.classList.add('open');
+    setTimeout(() => {
+      section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 1200);
+  }
+}
+</script>
+
+<div class="divider">
+  <svg viewBox="0 0 160 16"><path class="draw-path" d="M2,8 Q20,2 38,8 T76,8 T114,8 T158,8" stroke-width="2"/></svg>
+</div>
+
+<!-- CLOSING -->
+<section class="closing">
+  <svg class="closing-sketch" viewBox="0 0 160 160">
+    <circle class="draw-path accent-path" cx="80" cy="80" r="26"/>
+    <path class="draw-path accent-path" d="M80,38 L80,24" stroke-width="3"/>
+    <path class="draw-path accent-path" d="M80,122 L80,136" stroke-width="3"/>
+    <path class="draw-path accent-path" d="M38,80 L24,80" stroke-width="3"/>
+    <path class="draw-path accent-path" d="M122,80 L136,80" stroke-width="3"/>
+    <path class="draw-path accent-path" d="M50,50 L40,40" stroke-width="3"/>
+    <path class="draw-path accent-path" d="M110,50 L120,40" stroke-width="3"/>
+    <path class="draw-path accent-path" d="M50,110 L40,120" stroke-width="3"/>
+    <path class="draw-path accent-path" d="M110,110 L120,120" stroke-width="3"/>
+  </svg>
+  <h2>Happy Father's Day, Baba.</h2>
+  <p class="footer-credit">made with love — KOLKODE</p>
+</section>
+
+<script>
+  // animate sketch paths on scroll into view
+  const allPaths = document.querySelectorAll('.draw-path');
+  allPaths.forEach(p => {
+    const len = p.getTotalLength();
+    p.style.strokeDasharray = len;
+    p.style.strokeDashoffset = len;
+  });
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if(reduceMotion){
+    allPaths.forEach(p => p.style.strokeDashoffset = 0);
+  } else {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          const paths = entry.target.querySelectorAll('.draw-path');
+          paths.forEach((p, i) => {
+            setTimeout(() => { p.style.strokeDashoffset = 0; }, i * 200);
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('svg').forEach(svg => observer.observe(svg));
+  }
+
+  // magical floating effects for video container
+  const videoContainer = document.querySelector('.hero-video-container');
+  if(videoContainer) {
+    const heartPath = "M10,4 C10,1 5,1 5,5 C5,1 0,1 0,4 C0,7 5,11 5,11 C5,11 10,7 10,4 Z";
+    const planePath = "M 1,5 L 9,1 L 6,9 L 5,6 Z"; // Tiny paper airplane
+    
+    for(let i=0; i<18; i++){
+      const isPlane = Math.random() > 0.6;
+      const el = document.createElementNS("http://www.w3.org/2000/svg","svg");
+      el.setAttribute("viewBox","0 0 10 11");
+      el.setAttribute("width", isPlane ? "16" : "18");
+      el.setAttribute("height", isPlane ? "16" : "18");
+      el.classList.add("magic-particle");
+      el.style.left = (5 + Math.random()*90) + "%";
+      el.style.bottom = "-5%"; // Start slightly below the visible edge
+      
+      // Randomize sway and rotation
+      el.style.setProperty('--sway', (Math.random() * 40 - 20) + 'px');
+      el.style.setProperty('--rot', (Math.random() * 60 - 30) + 'deg');
+      
+      el.style.animation = `floatMagic ${4 + Math.random()*5}s ease-in-out infinite`;
+      el.style.animationDelay = (Math.random()*6) + "s";
+      
+      const path = document.createElementNS("http://www.w3.org/2000/svg","path");
+      path.setAttribute("d", isPlane ? planePath : heartPath);
+      path.setAttribute("fill", isPlane ? "#FFF3E0" : "#FFFFFF");
+      path.setAttribute("opacity", 0.5 + Math.random()*0.5);
+      el.appendChild(path);
+      videoContainer.appendChild(el);
+    }
+  }
+</script>
+
+</body>
+</html>
